@@ -1,0 +1,14 @@
+# dependencies & build
+/.cache
+/node_modules
+/public
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+.idea/
+.vscode/
+
+npm-debug.log*

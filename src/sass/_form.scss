@@ -1,0 +1,556 @@
+// All calculations are pixel base for form
+
+// Variables
+// Typography variables
+$form-base-font: 16px;
+$form-line-height: 1.4;
+$form-font-stack: monospace, 'Trebuchet MS', sans-serif;
+
+// Colors
+$color-1: #343434;
+$color-2: #34344a;
+$color-3: #fbf6f0;
+$color-4: #b32624;
+$color-5: #6b6b7b;
+$color-6: #bbbbc3;
+$color-7: #d8cab9;
+$color-8: #eccca6; // #e8bf90; // #b58751;
+$color-9: #f7e6d3;
+$color-10: #75644f;
+
+// Functions
+@function form-rhythmic($multiply) {
+  $result: $multiply * $form-line-height * $form-base-font;
+  @return $result;
+}
+
+@function form-modular-scale($value) {
+  $ratio: 1.5;
+  @return #{(pow($ratio, $value) * $form-base-font)};
+}
+
+@mixin rhythmic-lines() {
+  background-image: linear-gradient(#eee 1px, transparent 1px);
+  background-size: 100% form-rhythmic(1);
+}
+
+// Styles
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0;
+  background: $color-3;
+  border-bottom: 3px solid $color-7;
+  border-right: 3px solid $color-7;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    user-select: none;
+    float: right;
+  }
+
+  li {
+    display: inline-block;
+    padding: form-rhythmic(1/2) form-rhythmic(1/2);
+    cursor: pointer;
+
+    &:hover {
+      background: $color-7;
+    }
+  }
+
+  svg {
+    height: form-rhythmic(1);
+    fill: $color-2;
+  }
+
+  &.close {
+    width: auto;
+  }
+
+  &.open {
+    width: 100%;
+    border-bottom: 3px solid $color-7;
+    border-right: 3px solid $color-7;
+  }
+}
+
+// Form width
+.builder-form {
+  width: 100%;
+}
+
+@media all and (min-width: 800px) {
+  .builder-form {
+    max-width: 400px;
+  }
+
+  .main-nav {
+    &.open {
+      max-width: 400px;
+    }
+  }
+}
+
+.builder-form {
+  &.close {
+    transform: translateX(-100%);
+  }
+
+  &.open {
+  }
+}
+
+// Form styles
+.builder-form {
+  position: fixed;
+  top: form-rhythmic(2); // size of the navigation
+  left: 0;
+  bottom: 0;
+  padding-top: form-rhythmic(1);
+
+  border-right: 3px solid $color-7;
+  background: $color-3;
+
+  overflow-y: scroll;
+  color: $color-1;
+
+  // Typography
+  font-size: $form-base-font;
+  font-family: $form-font-stack;
+  line-height: $form-line-height;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  a,
+  span,
+  em,
+  label,
+  textarea,
+  input,
+  select {
+    margin: 0;
+    font-family: $form-font-stack;
+    font-size: form-modular-scale(-1);
+    line-height: form-rhythmic(1);
+  }
+
+  h1 {
+    font-size: form-modular-scale(1);
+    line-height: form-rhythmic(2);
+    color: $color-1;
+  }
+
+  h3 {
+    font-size: form-modular-scale(0);
+    line-height: form-rhythmic(1);
+    color: $color-2;
+  }
+
+  h4 {
+    color: $color-2;
+    margin-top: form-rhythmic(1);
+  }
+
+  h4,
+  p,
+  span {
+    font-size: form-modular-scale(-1);
+    line-height: form-rhythmic(1);
+  }
+
+  em {
+    font-size: form-modular-scale(-1);
+    line-height: form-rhythmic(1);
+  }
+
+  // Inputs types
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+  }
+
+  input,
+  textarea,
+  input:focus,
+  textarea:focus {
+    width: 100%;
+    background: transparent;
+    // background: #ffffe8;
+    border: none;
+    padding: 0;
+    line-height: form-rhythmic(1);
+  }
+
+  label {
+    display: block;
+    color: $color-5;
+    text-transform: uppercase;
+    position: absolute;
+
+    &.multi {
+      color: $color-2;
+      text-transform: none;
+      font-weight: 700;
+      font-size: form-modular-scale(-1);
+      line-height: form-rhythmic(1);
+    }
+  }
+
+  input {
+    width: 100%;
+  }
+
+  textarea {
+    width: 100%;
+    resize: none;
+  }
+
+  ::placeholder {
+    color: $color-6;
+  }
+
+  button {
+    appearance: none;
+    font-size: form-modular-scale(-1);
+    line-height: form-rhythmic(1);
+    padding: 0;
+
+    cursor: pointer;
+    background: transparent;
+
+    border: none;
+    color: $color-4;
+
+    &:hover {
+      color: $color-4;
+    }
+
+    &:disabled {
+      color: $color-6;
+    }
+  }
+
+  .form-info {
+    color: $color-8;
+  }
+
+  button + button {
+    margin-left: form-rhythmic(1);
+
+    &:before {
+      content: '|';
+      margin-right: form-rhythmic(1);
+    }
+  }
+
+  .download-button {
+    border: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin: form-rhythmic(1) auto;
+    padding: form-rhythmic(1/2);
+    background: $color-2;
+    color: white;
+    font-size: form-modular-scale(0);
+    text-transform: uppercase;
+    border-radius: 6px;
+
+    &:hover {
+      color: white;
+      background: $color-7;
+      border: none;
+    }
+
+    &:disabled {
+      color: white;
+      background: lighten($color: $color-2, $amount: 65);
+    }
+  }
+
+  svg {
+    fill: $color-2;
+  }
+
+  .info {
+    border: none;
+    &:hover {
+      border: none;
+    }
+  }
+
+  .input-wrapper {
+    position: relative;
+    margin: form-rhythmic(0.5) 0;
+
+    &::after {
+      content: ' ';
+      display: block;
+      clear: both;
+    }
+  }
+
+  .field-wrapper {
+    position: relative;
+    margin-left: form-rhythmic(4);
+
+    &-sm {
+      margin-left: form-rhythmic(1);
+    }
+  }
+
+  // Collapsible sections
+  .form-section {
+    padding: 0 form-rhythmic(1) form-rhythmic(1) form-rhythmic(1.5);
+    position: relative;
+  }
+
+  .section-header {
+    cursor: pointer;
+    user-select: none;
+
+    span {
+      position: absolute;
+      line-height: form-rhythmic(1);
+      left: 1em;
+    }
+
+    .info-icon {
+      margin-left: 1em;
+
+      svg {
+        position: relative;
+        height: 1.2em;
+        top: 0.17em;
+        color: $color-8;
+        fill: $color-10;
+      }
+    }
+  }
+
+  .info-box {
+    background-color: $color-9;
+    margin: form-rhythmic(0.5) 0;
+    padding: form-rhythmic(0.5) form-rhythmic(1);
+    color: $color-10;
+  }
+
+  .inline-svg {
+    line-height: inherit;
+
+    svg {
+      height: 1em;
+      width: 1em;
+      fill: #c79d87;
+    }
+  }
+
+  .image-picker {
+    cursor: pointer;
+  }
+
+  .image-picker-input {
+    visibility: hidden;
+    display: none;
+  }
+
+  .selected-image {
+    width: form-rhythmic(3);
+    position: relative;
+    margin: 0 0 form-rhythmic(1) 0;
+    text-align: center;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: form-rhythmic(3);
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+
+  .selected-images {
+    margin: form-rhythmic(1) 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      width: form-rhythmic(4);
+      overflow: hidden;
+      position: relative;
+      margin: 0 10px 10px 0;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: form-rhythmic(4);
+        max-height: form-rhythmic(4);
+        width: auto;
+        height: auto;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .remove-image {
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: form-modular-scale(-1);
+    line-height: form-rhythmic(1);
+
+    color: $color-4;
+
+    &:hover {
+      background: $color-4;
+      color: white;
+    }
+  }
+
+  .form-image {
+    span {
+      display: block;
+      margin-right: form-rhythmic(1);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+
+  .image-and-position {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .position-picker {
+    width: 33px;
+    flex-shrink: 0;
+    margin: form-rhythmic(1/2) form-rhythmic(1) form-rhythmic(1/2) 0;
+
+    .picker-base {
+      width: 10px;
+      height: 10px;
+      margin-right: 1px;
+      margin-bottom: 1px;
+      display: inline-block;
+    }
+
+    .picker {
+      border: 1px solid $color-7;
+
+      cursor: pointer;
+
+      &.active {
+        background: $color-7;
+      }
+
+      &:hover {
+        background: $color-7;
+      }
+    }
+  }
+
+  .tabs {
+    widows: 100%;
+    position: relative;
+
+    span {
+      display: inline-block;
+      width: 32%;
+      margin-right: 1%;
+      border: 1px solid $color-7;
+      text-align: center;
+      cursor: pointer;
+      text-transform: uppercase;
+
+      &.active {
+        background: $color-7;
+      }
+
+      &:hover {
+        background: $color-7;
+      }
+    }
+  }
+
+  .store-options {
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    appearance: none;
+    line-height: form-rhythmic(1);
+
+    cursor: pointer;
+    background: transparent;
+
+    border: none;
+    color: $color-4;
+
+    &:hover {
+      color: $color-4;
+    }
+  }
+
+  .form-store-link {
+    position: relative;
+
+    // input {
+    //     padding-right: form-rhythmic(1);
+    // }
+
+    > svg {
+      position: absolute;
+      left: 0;
+      top: 0.2em;
+      height: form-rhythmic(0.8);
+      padding: 2px;
+    }
+  }
+
+  .delete-button {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    height: form-rhythmic(1);
+    width: form-rhythmic(0.7);
+    svg {
+      fill: $color-4;
+    }
+  }
+
+  input[type='text'] + textarea,
+  input[type='text'] + input[type='text'] {
+    margin-top: form-rhythmic(1/4);
+  }
+
+  .build-with {
+    button {
+      height: 1.2em;
+      height: 1.2em;
+      margin-right: 1.5em;
+      display: inline-block;
+    }
+    svg {
+      fill: $color-4;
+      height: 1.2em;
+      position: absolute;
+      top: 0.3em;
+    }
+  }
+}
