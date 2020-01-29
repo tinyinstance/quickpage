@@ -16,7 +16,7 @@ Quick Page allows me to quickly create beautiful, minimalist static pages using 
 
 [Pouchdb](https://pouchdb.com) for the local image storage
 
-[Jest](https://jestjs.io) and [enzyem](https://airbnb.io/enzyme/) for the testing
+[Jest](https://jestjs.io) and [Enzyme](https://airbnb.io/enzyme/) for the testing
 
 [asdf-vm](https://asdf-vm.com/#/) for managing versions for node and ruby
 
